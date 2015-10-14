@@ -14,6 +14,9 @@
 		324F41611BCBD322001C58D0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 324F41601BCBD322001C58D0 /* Images.xcassets */; };
 		324F41641BCBD322001C58D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324F41621BCBD322001C58D0 /* LaunchScreen.xib */; };
 		324F41701BCBD322001C58D0 /* SuperGuessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 324F416F1BCBD322001C58D0 /* SuperGuessTests.m */; };
+		324F417A1BCBD492001C58D0 /* questions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 324F41791BCBD492001C58D0 /* questions.plist */; };
+		32BFF5901BCDDB3900F97018 /* RXappInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BFF58F1BCDDB3900F97018 /* RXappInfo.m */; };
+		32BFF5931BCDE0BD00F97018 /* NSArray+Chinese.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BFF5921BCDE0BD00F97018 /* NSArray+Chinese.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,11 @@
 		324F41691BCBD322001C58D0 /* SuperGuessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperGuessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		324F416E1BCBD322001C58D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		324F416F1BCBD322001C58D0 /* SuperGuessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuperGuessTests.m; sourceTree = "<group>"; };
+		324F41791BCBD492001C58D0 /* questions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = questions.plist; sourceTree = "<group>"; };
+		32BFF58E1BCDDB3900F97018 /* RXappInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXappInfo.h; sourceTree = "<group>"; };
+		32BFF58F1BCDDB3900F97018 /* RXappInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXappInfo.m; sourceTree = "<group>"; };
+		32BFF5911BCDE0BD00F97018 /* NSArray+Chinese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Chinese.h"; sourceTree = "<group>"; };
+		32BFF5921BCDE0BD00F97018 /* NSArray+Chinese.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Chinese.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +93,14 @@
 				324F41581BCBD322001C58D0 /* AppDelegate.m */,
 				324F415A1BCBD322001C58D0 /* ViewController.h */,
 				324F415B1BCBD322001C58D0 /* ViewController.m */,
+				32BFF58E1BCDDB3900F97018 /* RXappInfo.h */,
+				32BFF58F1BCDDB3900F97018 /* RXappInfo.m */,
 				324F415D1BCBD322001C58D0 /* Main.storyboard */,
 				324F41601BCBD322001C58D0 /* Images.xcassets */,
 				324F41621BCBD322001C58D0 /* LaunchScreen.xib */,
 				324F41531BCBD322001C58D0 /* Supporting Files */,
+				32BFF5911BCDE0BD00F97018 /* NSArray+Chinese.h */,
+				32BFF5921BCDE0BD00F97018 /* NSArray+Chinese.m */,
 			);
 			path = SuperGuess;
 			sourceTree = "<group>";
@@ -96,6 +108,7 @@
 		324F41531BCBD322001C58D0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				324F41791BCBD492001C58D0 /* questions.plist */,
 				324F41541BCBD322001C58D0 /* Info.plist */,
 				324F41551BCBD322001C58D0 /* main.m */,
 			);
@@ -199,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				324F417A1BCBD492001C58D0 /* questions.plist in Resources */,
 				324F415F1BCBD322001C58D0 /* Main.storyboard in Resources */,
 				324F41641BCBD322001C58D0 /* LaunchScreen.xib in Resources */,
 				324F41611BCBD322001C58D0 /* Images.xcassets in Resources */,
@@ -220,6 +234,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				324F415C1BCBD322001C58D0 /* ViewController.m in Sources */,
+				32BFF5931BCDE0BD00F97018 /* NSArray+Chinese.m in Sources */,
+				32BFF5901BCDDB3900F97018 /* RXappInfo.m in Sources */,
 				324F41591BCBD322001C58D0 /* AppDelegate.m in Sources */,
 				324F41561BCBD322001C58D0 /* main.m in Sources */,
 			);
@@ -412,6 +428,7 @@
 				324F41751BCBD322001C58D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		324F41761BCBD322001C58D0 /* Build configuration list for PBXNativeTarget "SuperGuessTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +437,7 @@
 				324F41781BCBD322001C58D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
