@@ -10,7 +10,7 @@
 
 @interface RXappInfo : NSObject
 
-@property (nonatomic,copy) NSString *name;
+@property (nonatomic,copy) NSString *answer;
 @property (nonatomic,copy) NSString *icon;
 @property (nonatomic,copy) NSString *title;
 @property (nonatomic,copy) NSArray *options;

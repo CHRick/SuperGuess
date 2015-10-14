@@ -37,7 +37,7 @@
 
 - (NSString *)description
 {
-    NSString *str = [NSString stringWithFormat:@"<%@:%p> = {name: %@, icon: %@, title: %@, options: %@}",self.class,self,self.name,self.icon,self.title,self.options];
+    NSString *str = [NSString stringWithFormat:@"<%@:%p> = {name: %@, icon: %@, title: %@, options: %@}",self.class,self,self.answer,self.icon,self.title,self.options];
     return str;
 }
 

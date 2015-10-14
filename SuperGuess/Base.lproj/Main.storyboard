@@ -81,7 +81,7 @@
                                 </state>
                                 <state key="highlighted" backgroundImage="btn_right_highlighted"/>
                                 <connections>
-                                    <action selector="nextImage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="l9h-2I-yi8"/>
+                                    <action selector="nextImage" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1Jn-Cx-bHn"/>
                                 </connections>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DSV-uj-cXq">
@@ -92,6 +92,16 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <view contentMode="scaleToFill" id="nlH-Qc-Xz5" userLabel="answer">
+                                <rect key="frame" x="0.0" y="244" width="320" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="Vac-TX-hcQ" userLabel="options">
+                                <rect key="frame" x="0.0" y="295" width="320" height="185"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -100,14 +110,17 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="480"/>
                     <connections>
+                        <outlet property="answerView" destination="nlH-Qc-Xz5" id="ad7-gx-ftt"/>
                         <outlet property="iconButton" destination="ggA-vZ-tkf" id="HAx-uv-o7F"/>
                         <outlet property="imageName" destination="506-gR-dDP" id="vQx-Ru-RIv"/>
+                        <outlet property="nextButton" destination="Urz-Su-GH0" id="abW-lc-rVl"/>
                         <outlet property="numLabel" destination="WtS-ki-kcx" id="ia2-h2-Ean"/>
+                        <outlet property="optionView" destination="Vac-TX-hcQ" id="vUX-Px-mb0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="234.66666666666666" y="366.36000000000001"/>
+            <point key="canvasLocation" x="234" y="366"/>
         </scene>
     </scenes>
     <resources>
