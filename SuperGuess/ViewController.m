@@ -77,6 +77,8 @@
     
 }
 
+#pragma mark - NextButton
+
 - (IBAction)nextImage {
     self.index ++;
     
@@ -87,30 +89,6 @@
     [self creatOptionButton:question];
     
     }
-
-- (void)setBascInfo:(RXappInfo *)question
-{
-    [self.numLabel setText:[NSString stringWithFormat:@"%d/%d",self.index+1,self.questions.count]];
-    self.imageName.text = question.title;
-    [self.iconButton setImage:[UIImage imageNamed:question.icon] forState:UIControlStateNormal];
-    self.nextButton.enabled = (self.index < self.questions.count - 1);
-}
-
-- (void)creatAnswerButton:(RXappInfo *)question
-{
-    for (UIView *view in self.answerView.subviews) {
-        [view removeFromSuperview];
-    }
-    CGFloat answerX = (self.answerView.bounds.size.width - kButtonW * question.answer.length - kMargin * (question.answer.length -1)) * 0.5;
-    for (int i = 0; i < question.answer.length; i++) {
-        CGFloat x = answerX + i * (kButtonW + kMargin);
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(x, 0, kButtonW, kButtonH)];
-        [btn setBackgroundImage:[UIImage imageNamed:@"btn_answer"] forState:UIControlStateNormal];
-        [btn setBackgroundImage:[UIImage imageNamed:@"btn_left_highlighted"] forState:UIControlStateHighlighted];
-        [self.answerView addSubview:btn];
-    }
-
-}
 
 - (void)creatOptionButton:(RXappInfo *)question
 {
@@ -130,16 +108,115 @@
             [btn setTitle:question.options[i] forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [self.optionView addSubview:btn];
+            [btn addTarget:self action:@selector(optionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
-    
     int i = 0;
     for (UIButton *btn in self.optionView.subviews) {
         [btn setTitle:question.options[i] forState:UIControlStateNormal];
+        btn.hidden = NO;
         i++;
+    }
+    
+}
+
+- (void)creatAnswerButton:(RXappInfo *)question
+{
+    for (UIView *view in self.answerView.subviews) {
+        [view removeFromSuperview];
+    }
+    CGFloat answerX = (self.answerView.bounds.size.width - kButtonW * question.answer.length - kMargin * (question.answer.length -1)) * 0.5;
+    for (int i = 0; i < question.answer.length; i++) {
+        CGFloat x = answerX + i * (kButtonW + kMargin);
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(x, 0, kButtonW, kButtonH)];
+        [btn setBackgroundImage:[UIImage imageNamed:@"btn_answer"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"btn_left_highlighted"] forState:UIControlStateHighlighted];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.answerView addSubview:btn];
+        [btn addTarget:self action:@selector(answerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
 
 }
+
+    - (void)setBascInfo:(RXappInfo *)question
+    {
+        [self.numLabel setText:[NSString stringWithFormat:@"%d/%d",self.index+1,self.questions.count]];
+        self.imageName.text = question.title;
+        [self.iconButton setImage:[UIImage imageNamed:question.icon] forState:UIControlStateNormal];
+        self.nextButton.enabled = (self.index < self.questions.count - 1);
+    }
+
+#pragma mark - optionButtonClick
+- (void) optionButtonClick:(UIButton *)button
+{
+    UIButton *btn = [self firstAnswerButton];
+    if (btn == nil) {
+        return;
+    }
+    [btn setTitle:button.currentTitle forState:UIControlStateNormal];
+    button.hidden = YES;
+    [self judge];
+    
+}
+
+- (void)judge
+{
+    RXappInfo *question = [RXappInfo appInfoWithDictionary:self.questions[self.index]];
+    NSMutableString *strM = [[NSMutableString alloc]init];
+    BOOL isFull = YES;
+    for (UIButton *btn in self.answerView.subviews) {
+        if (btn.currentTitle.length > 0) {
+            [strM appendString:btn.currentTitle];
+        }else{
+            isFull = NO;
+            break;
+        }
+    }
+    if (isFull) {
+        if ([strM isEqualToString:question.answer]) {
+            [self setAnswerTitleColor:[UIColor blueColor]];
+            [self performSelector:@selector(nextImage) withObject:nil afterDelay:0.5];
+        }else{
+            [self setAnswerTitleColor:[UIColor redColor]];
+        }
+    }
+}
+
+- (void)setAnswerTitleColor:(UIColor *)color
+{
+    for (UIButton *btn in self.answerView.subviews) {
+        [btn setTitleColor:color forState:UIControlStateNormal];
+    }
+}
+
+- (UIButton *)firstAnswerButton
+{
+    for (UIButton *btn in self.answerView.subviews) {
+        if (btn.currentTitle.length == 0) {
+            return btn;
+        }
+    }
+    return  nil;
+}
+
+#pragma mark - AnswerButtonClick
+
+- (void)answerButtonClick:(UIButton *)button
+{
+    for (UIButton *btn in self.optionView.subviews) {
+        if ([button.currentTitle isEqualToString:btn.currentTitle] && btn.hidden) {
+            btn.hidden = NO;
+            [self setAnswerTitleColor:[UIColor blackColor]];
+            [button setTitle:@"" forState:UIControlStateNormal];
+        }
+    }
+}
+
+#pragma mark - TipButtonClick
+
+
+
+#pragma mark - BigImage
 
 - (IBAction)bigImage{
     
@@ -158,7 +235,7 @@
     
     }else{
         [UIView animateWithDuration:1.0 animations:^{
-            _iconButton.frame = CGRectMake(89, 86, 150, 150);
+            self.iconButton.frame = CGRectMake(89, 86, 150, 150);
             self.cover.alpha = 0.0;
         }];
     }
