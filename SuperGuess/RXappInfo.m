@@ -15,6 +15,7 @@
     self = [super init];
     if (self) {
         [self setValuesForKeysWithDictionary:dict];
+        self.options = [self selectInfo:self.options];
     }
     return self;
 }
@@ -33,6 +34,25 @@
         [arrayM addObject:dic];
     }
     return arrayM;
+}
+
+/**
+ *  数组乱序
+ *
+ *  @param array 要排序的数组
+ *
+ *  @return 乱序后的数组
+ */
+- (NSArray *)selectInfo:(NSArray *)array
+{
+    return [array sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+        NSInteger seed = arc4random_uniform(2);
+        if (seed) {
+            return [obj1 compare:obj2];
+        }else{
+            return [obj2 compare:obj1];
+        }
+    }];
 }
 
 - (NSString *)description

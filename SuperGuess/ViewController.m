@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *imageName;
 @property (nonatomic,copy) NSArray *questions;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *score;
 
 @property (weak, nonatomic) IBOutlet UIView *answerView;
 @property (weak, nonatomic) IBOutlet UIView *optionView;
@@ -49,25 +50,6 @@
         _questions = [RXappInfo appInfo];
     }
     return _questions;
-}
-
-/**
- *  数组乱序
- *
- *  @param array 要排序的数组
- *
- *  @return 乱序后的数组
- */
-- (NSArray *)selectInfo:(NSArray *)array
-{
-    return [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSInteger seed = arc4random_uniform(2);
-        if (seed) {
-            return [obj1 compare:obj2];
-        }else{
-            return [obj2 compare:obj1];
-        }
-    }];
 }
 
 - (void)viewDidLoad {
@@ -175,6 +157,7 @@
     if (isFull) {
         if ([strM isEqualToString:question.answer]) {
             [self setAnswerTitleColor:[UIColor blueColor]];
+            [self.score setTitle:[self score:800] forState:UIControlStateNormal];
             [self performSelector:@selector(nextImage) withObject:nil afterDelay:0.5];
         }else{
             [self setAnswerTitleColor:[UIColor redColor]];
@@ -214,7 +197,28 @@
 
 #pragma mark - TipButtonClick
 
+- (IBAction)tipClick
+{
+    for (UIButton *btn in self.answerView.subviews) {
+        [self answerButtonClick:btn];
+    }
+    UIButton *first = [self firstAnswerButton];
+    RXappInfo *question = [RXappInfo appInfoWithDictionary:self.questions[self.index]];
+    NSString *str = [question.answer substringToIndex:1];
+    for (UIButton *btn in self.optionView.subviews) {
+        if ([btn.currentTitle isEqualToString:str] && btn.hidden == NO) {
+            btn.hidden = YES;
+        }
+    }
+    [first setTitle:str forState:UIControlStateNormal];
+    [self.score setTitle:[self score:-1000] forState:UIControlStateNormal];
+    
+}
 
+- (NSString *)score:(NSInteger)score
+{
+    return [NSString stringWithFormat:@"%d",[self.score.currentTitle integerValue] + score];
+}
 
 #pragma mark - BigImage
 
